@@ -67,5 +67,9 @@ Recap facts ja palvelun verifiointi
 Toistettavuus, skaala ja versionhallinta
 
 Yhteenveto
-
+testi
+testi
+testi
+testi
+testi 
 Opitut asiat.
