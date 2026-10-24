@@ -53,23 +53,33 @@ Inventory
 
 
 SNMP Playbook
-Koodi ja tulokset.
+    reports/images install-snmp2.png
+    reports/images TaskError.png
+    reports/images snmpInstalled.png
+
+    Jouduin käyttämään tekoälyä selvittämään ongelmaa, jossa SNMP start service ei käynnistynyt oikein.
+
+
 
 Node Exporter Playbook
-Koodi ja tulokset.
+    Tein tämän koodin tekoälyllä ajan säästämiseksi. En ollut ihan varma pitikö tässä(ja snmp tehtävässä) nyt käyttää valmiita install tiedostoja vai tehdä omat...
+
+    reports/images install-node-exporter2.png
+    reports/images Recap
 
 Vertailu
-Käsin vs. automaatio.
 
-Automaatio:Rajatut kohteet kuten inventory, ryhmät, host patternit
-Syntax check, check mode ja limit
-Recap facts ja palvelun verifiointi
-Toistettavuus, skaala ja versionhallinta
+    Tässä varmaan hyvänä esimerkkinä tuo tehtävä 2.5
+    Tein tekoälyllä nopeasti playbookin sisältäen tiedot:
+        käyttöjärjestelmä
+        IP-osoite
+        prosessorien määrä
+        muistin määrä
+
+    reports/images/system-info.png
+
 
 Yhteenveto
-testi
-testi
-testi
-testi
-testi 
-Opitut asiat.
+    Playbookkien tekeminen oli mielekästä (tosin tekoälyllä luotuja, ajan säästämiseksi). Tehokas tapa saada asioita hoidettua, dataa kerättyä yms. 
+
+    Otin myös WSL:n toimintaan VSC kautta kuten luentovideossa puhuit.
