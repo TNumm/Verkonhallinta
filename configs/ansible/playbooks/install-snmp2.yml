@@ -1,0 +1,26 @@
+
+---
+- name: Install SNMP
+  hosts:
+    - web1
+    - db1
+    - branch-client
+  become: false
+
+  tasks:
+    - name: Update package list
+      ansible.builtin.apt:
+        update_cache: yes
+
+    - name: Install SNMP packages
+      ansible.builtin.apt:
+        name:
+          - snmp
+          - snmpd
+        state: present
+
+    - name: Start SNMP service
+      ansible.builtin.shell: |
+        if ! pgrep -x snmpd > /dev/null; then
+          /usr/sbin/snmpd
+        fi

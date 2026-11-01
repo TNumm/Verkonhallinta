@@ -1,0 +1,15 @@
+
+---
+- name: Collect system information
+  hosts: linux_hosts
+  gather_facts: true
+
+  tasks:
+    - name: Display system information
+      ansible.builtin.debug:
+        msg:
+          - "Device: {{ inventory_hostname }}"
+          - "OS: {{ ansible_facts['distribution'] }}"
+          - "IP: {{ ansible_facts.get('default_ipv4', {}).get('address', 'Not available') }}"
+          - "CPU: {{ ansible_facts.get('processor_vcpus', 'Not available') }}"
+          - "RAM: {{ ansible_facts.get('memtotal_mb', 'Not available') }} MB"
