@@ -1,0 +1,40 @@
+
+---
+- name: Backup FRRouting configurations
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Get running configuration
+      ansible.builtin.raw: vtysh -c "show running-config"
+      register: router_config
+      changed_when: false
+
+    - name: Create backup directory
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/../backups"
+        state: directory
+        mode: '0755'
+      delegate_to: localhost
+      become: false
+
+    - name: Save configuration to Ansible server
+      ansible.builtin.copy:
+        content: "{{ router_config.stdout }}"
+        dest: "{{ playbook_dir }}/../backups/{{ inventory_hostname }}.conf"
+        mode: '0644'
+      delegate_to: localhost
+      become: false
+
+    - name: Get Linux interface configuration
+      ansible.builtin.raw: ip -br addr
+      register: linux_interfaces
+      changed_when: false
+
+    - name: Save Linux interface configuration
+      ansible.builtin.copy:
+        content: "{{ linux_interfaces.stdout }}"
+        dest: "{{ playbook_dir }}/../backups/{{ inventory_hostname }}-interfaces.txt"
+        mode: '0644'
+      delegate_to: localhost
+      become: false

@@ -1,0 +1,48 @@
+
+---
+- name: Verify router connectivity
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Check SSH connectivity
+      ansible.builtin.raw: hostname
+      register: connectivity
+      changed_when: false
+
+    - name: Confirm router is reachable
+      ansible.builtin.assert:
+        that:
+          - connectivity.rc == 0
+        success_msg: "{{ inventory_hostname }} is reachable"
+        fail_msg: "{{ inventory_hostname }} is unreachable"
+
+- name: Verify R3 loopback configuration
+  hosts: r3-branch
+  gather_facts: false
+
+  tasks:
+    - name: Check lo10 interface
+      ansible.builtin.raw: ip link show lo10
+      register: loopback_interface
+      changed_when: false
+      failed_when: false
+
+    - name: Verify lo10 exists
+      ansible.builtin.assert:
+        that:
+          - loopback_interface.rc == 0
+        success_msg: "lo10 interface exists"
+        fail_msg: "lo10 interface is missing"
+
+    - name: Check lo10 IP address
+      ansible.builtin.raw: ip -o -4 addr show dev lo10
+      register: loopback_ip
+      changed_when: false
+
+    - name: Verify correct IP address
+      ansible.builtin.assert:
+        that:
+          - "'192.0.2.3/32' in loopback_ip.stdout"
+        success_msg: "lo10 has the correct IP address"
+        fail_msg: "lo10 IP address is incorrect"

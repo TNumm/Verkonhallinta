@@ -1,0 +1,41 @@
+
+---
+- name: Collect router system information
+  hosts: routers
+  gather_facts: false
+
+  tasks:
+    - name: Get hostname
+      ansible.builtin.raw: hostname
+      register: router_hostname
+      changed_when: false
+
+    - name: Get IP addresses and interfaces
+      ansible.builtin.raw: ip -br addr
+      register: router_interfaces
+      changed_when: false
+
+    - name: Get operating system information
+      ansible.builtin.raw: cat /etc/os-release
+      register: router_os
+      changed_when: false
+
+    - name: Get uptime
+      ansible.builtin.raw: uptime
+      register: router_uptime
+      changed_when: false
+
+    - name: Display collected information
+      ansible.builtin.debug:
+        msg: |
+          Hostname:
+          {{ router_hostname.stdout }}
+
+          IP addresses and interfaces:
+          {{ router_interfaces.stdout }}
+
+          Operating system:
+          {{ router_os.stdout }}
+
+          Uptime:
+          {{ router_uptime.stdout }}

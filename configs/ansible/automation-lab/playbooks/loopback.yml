@@ -1,0 +1,44 @@
+
+---
+- name: Configure loopback interface on R3
+  hosts: r3-branch
+  gather_facts: false
+
+  tasks:
+    - name: Remove incorrect loopback IP
+      ansible.builtin.raw: >
+        sudo -n /sbin/ip addr del 192.0.2.99/32 dev lo10
+      when: true
+
+    - name: Check if lo10 interface exists
+      ansible.builtin.raw: ip link show lo10
+      register: loopback_check
+      changed_when: false
+      failed_when: false
+
+    - name: Create loopback interface
+      ansible.builtin.raw: sudo -n /sbin/ip link add lo10 type dummy
+      when: loopback_check.rc != 0
+      changed_when: true
+
+    - name: Check loopback IP address
+      ansible.builtin.raw: ip -o -4 addr show dev lo10
+      register: loopback_ip
+      changed_when: false
+
+    - name: Configure loopback IP address
+      ansible.builtin.raw: sudo -n /sbin/ip addr add 192.0.2.3/32 dev lo10
+      when: "'192.0.2.3/32' not in loopback_ip.stdout"
+      changed_when: true
+
+    - name: Check loopback interface state
+      ansible.builtin.raw: ip -o link show dev lo10
+      register: loopback_state
+      changed_when: false
+
+    - name: Enable loopback interface
+      ansible.builtin.raw: sudo -n /sbin/ip link set lo10 up
+      when: "'UP' not in loopback_state.stdout.split('<')[1].split('>')[0].split(',')"
+      changed_when: true
+    
+    
