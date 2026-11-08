@@ -42,8 +42,12 @@ images/GoldenTopology.png
 
 
 5. Triggerit
-Määritetyt triggerit ja niiden toiminta.
+Images/Triggers
 
+    Cpu Over 80% {web1:system.cpu.util.last()}>80
+    Disc space < 20% {web1:vfs.fs.size[/configs,pused].last()}>80
+
+    
 6. Hälytys- ja häiriötestit
 Suoritetut testit ja tulokset.
 
