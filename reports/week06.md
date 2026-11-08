@@ -42,14 +42,18 @@ images/GoldenTopology.png
 
 
 5. Triggerit
-Images/Triggers
+Images/Triggers.png
 
-    Cpu Over 80% {web1:system.cpu.util.last()}>80
-    Disc space < 20% {web1:vfs.fs.size[/configs,pused].last()}>80
+    Cpu Over 80% {web1:system.cpu.util.last()}>80   Vakavuus High
+    Disc space < 20% {web1:vfs.fs.size[/configs,pused].last()}>80 Vakavuus High
 
-    
+
 6. Hälytys- ja häiriötestit
-Suoritetut testit ja tulokset.
+Images/Web1Triggered.png
+Images/web1TriggerData.png
+
+syntyykö triggeri - Kyllä syntyi
+kuinka nopeasti hälytys ilmestyy - Siinä meni noin, 30sec-60sec että raja ylittyi. (Kävin muuttamassa hälytyksen rajan 3%, 80% sijaan, en saanut sitä nousemaan niin ylös...)
 
 7. Vertailu
     Käytin tässä hieman tekoälyä apuna muistin virkistämiseksi
@@ -63,4 +67,9 @@ Suoritetut testit ja tulokset.
     Yrityskäyttö 			    Yleinen verkkolaitteiden valvonnassa    Soveltuu hyvin pilvi ja konttiympäristöihin     Soveltuu keskitettyyn palvelin ja verkkovalvontaan
 
 8. Yhteenveto
-Kurssin tärkeimmät opit.
+    Mitä hyötyä keskitetystä valvonnasta on? - Voidaan seurata useam laitteen toimintaa keskitetysti yhdesta dashboardista
+    Mitkä mittarit ovat mielestäsi tärkeimpiä? - Ne joilla voidaan seurata järjestelmän rasitusta. Kuten cpu ja memory usage sekä verkkoliikenne
+    Millaisista tilanteista ylläpitäjän pitäisi saada hälytys? - Silloin kun on selvästi jotain akuuttia meneillään. Siksi ei aseteta turhia triggereitä.
+    Missä tilanteissa käyttäisit Prometheusta? - Käyttäisin Prometheusta erityisesti kontti- ja pilviympäristöjen valvonnassa.
+    Missä tilanteissa käyttäisit Zabbixia? - Käyttäisin Zabbixia esimerkiksi yrityksen palvelimien, verkkolaitteiden ja muiden IT-järjestelmien keskitettyyn valvontaan
+    Mitä valvontatoimintoja lisäisit tähän ympäristöön? - Taisi olla jotain puhetta tallennevideolla, että saa discordiin on rajapinta olemassa? Sitä olisin voinut kokeilla.
