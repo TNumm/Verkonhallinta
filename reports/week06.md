@@ -48,13 +48,15 @@ Määritetyt triggerit ja niiden toiminta.
 Suoritetut testit ja tulokset.
 
 7. Vertailu
-    Ominaisuus 	                SNMP 	    Prometheus  	Zabbix
-    Tiedonkeruu 			
-    Dashboardit 			
-    Hälytykset 			
-    Käyttöönotto 			
-    Skaalautuvuus 			
-    Yrityskäyttö 			
+    Käytin tässä hieman tekoälyä apuna muistin virkistämiseksi
+
+    Ominaisuus 	                SNMP 	                                Prometheus  	                                Zabbix
+    Tiedonkeruu 			    SNMP Kyselyt                            HTTP rajapinta                                 Agentit
+    Dashboardit 			    -                                       Grafana                                        Oma sisäänrakennettu dashboard
+    Hälytykset 		            Tukee trap                              Hälytyssäännöt	ja alert management             Sisäänrakennettu hälytysjärjestelmä
+    Käyttöönotto 			    Helppo, vaatii valvonta ohjelman        Vaatii palvelimen ja mittarien määrittämisen   Vaatii palvelimen ja valvottavien laitteden määrittämisen
+    Skaalautuvuus 			    Heikko                                  Hyvä, soveltuu suuriin ympäristöihin           Hyvä, soveltuu suuriin ympäristöihin
+    Yrityskäyttö 			    Yleinen verkkolaitteiden valvonnassa    Soveltuu hyvin pilvi ja konttiympäristöihin     Soveltuu keskitettyyn palvelin ja verkkovalvontaan
 
 8. Yhteenveto
 Kurssin tärkeimmät opit.
