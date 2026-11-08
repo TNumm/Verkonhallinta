@@ -24,7 +24,7 @@ Tehtävä 6.1 – Tutustu Zabbixiin
         images/Hostit
 
 3. Dashboard
-Kuvakaappaus dashboardista.
+images/GoldenTopology.png
 
 4. Mittarit
     Valitse vähintään viisi mittaria.
